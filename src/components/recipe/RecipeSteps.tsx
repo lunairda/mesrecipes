@@ -67,8 +67,11 @@ interface Props {
   stepWord: string;
 }
 
+const STEAM_NOTE = "Place the mixture in a heatproof bowl set over a pot of simmering water. Cover with a lid or foil and steam for 20–25 minutes, stirring every 5 minutes, until the dough turns translucent and stretchy. Make sure the bowl doesn't touch the water directly.";
+
 export function RecipeSteps({ steps, stepWord }: Props) {
   const [timer, setTimer] = useState<TimerState | null>(null);
+  const [steamOpenIdx, setSteamOpenIdx] = useState<number | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   function tick() {
@@ -154,6 +157,34 @@ export function RecipeSteps({ steps, stepWord }: Props) {
                 <p className="text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#2C3A2C" }}>
                   {step}
                 </p>
+                {step.toLowerCase().includes("microwave") && (
+                  <div className="mt-2.5">
+                    <button
+                      onClick={() => setSteamOpenIdx(steamOpenIdx === i ? null : i)}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold transition-opacity hover:opacity-70 cursor-pointer"
+                      style={{ backgroundColor: "#FFF8EC", color: "#C9A84C", border: "1px dashed #C9A84C", fontFamily: "var(--font-body)" }}
+                    >
+                      <span>🫕</span>
+                      <span>No microwave?</span>
+                    </button>
+                    {steamOpenIdx === i && (
+                      <div
+                        className="mt-3 p-4 rounded-xl text-xs leading-relaxed max-w-sm"
+                        style={{
+                          backgroundColor: "#FFFBF0",
+                          border: "1px solid #F0E4B8",
+                          fontFamily: "var(--font-body)",
+                          color: "#2C3A2C",
+                          transform: "rotate(-0.5deg)",
+                          boxShadow: "2px 3px 12px rgba(201, 168, 76, 0.15)",
+                        }}
+                      >
+                        <p className="font-semibold mb-1.5" style={{ color: "#C9A84C" }}>Steam method ✦</p>
+                        <p>{STEAM_NOTE}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
                 {timeMatch && (
                   <button
                     onClick={() => startTimer(timeMatch.seconds, `${stepWord} ${i + 1} · ${timeMatch.label}`)}
