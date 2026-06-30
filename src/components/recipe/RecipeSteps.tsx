@@ -233,7 +233,16 @@ export function RecipeSteps({ steps, stepWord }: Props) {
                   style={{ backgroundColor: "#7A9E7E" }}
                   aria-label={timer.running ? "Pause" : "Resume"}
                 >
-                  {timer.running ? "⏸" : "▶"}
+                  {timer.running ? (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="white" aria-hidden="true">
+                      <rect x="2" y="1" width="3.5" height="12" rx="1"/>
+                      <rect x="8.5" y="1" width="3.5" height="12" rx="1"/>
+                    </svg>
+                  ) : (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="white" aria-hidden="true">
+                      <polygon points="2,1 13,7 2,13"/>
+                    </svg>
+                  )}
                 </button>
                 <button
                   onClick={resetTimer}
@@ -241,7 +250,10 @@ export function RecipeSteps({ steps, stepWord }: Props) {
                   style={{ backgroundColor: "#EDE9E1", color: "#C8B89A" }}
                   aria-label="Reset"
                 >
-                  ↺
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#C8B89A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M2 7a5 5 0 1 0 1-3"/>
+                    <polyline points="2,1 2,4 5,4"/>
+                  </svg>
                 </button>
               </div>
             ) : (
