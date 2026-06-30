@@ -1,0 +1,39 @@
+import { getAllRecipes, getAllTags } from "@/lib/recipes";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
+import { RecipesClient } from "./RecipesClient";
+import { Bowl } from "@/components/doodles";
+import { getT, type Locale } from "@/lib/i18n";
+
+interface Props {
+  params: Promise<{ lang: string }>;
+}
+
+export default async function RecipesPage({ params }: Props) {
+  const { lang } = await params;
+  const locale = lang as Locale;
+  const t = getT(locale);
+  const recipes = getAllRecipes(locale);
+  const allTags = getAllTags(locale);
+
+  return (
+    <>
+      <Nav lang={locale} />
+      <main className="flex-1 px-6 md:px-12 py-16">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex items-center gap-3 mb-3">
+            <Bowl size={28} color="#C46E72" />
+            <h1 className="text-4xl md:text-5xl font-bold" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+              {t.recipes.title}
+            </h1>
+          </div>
+          <p className="mb-12 text-base" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+            {t.recipes.subtitle}
+          </p>
+          <RecipesClient recipes={recipes} allTags={allTags} t={t.recipes} locale={locale} />
+        </div>
+      </main>
+      <Footer lang={locale} />
+    </>
+  );
+}

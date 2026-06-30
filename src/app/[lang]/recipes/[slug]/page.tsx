@@ -1,0 +1,187 @@
+import { notFound } from "next/navigation";
+import Image from "next/image";
+import fs from "fs";
+import path from "path";
+import { getAllRecipes, getRecipeBySlug } from "@/lib/recipes";
+import { locales, getT, type Locale } from "@/lib/i18n";
+import { Nav } from "@/components/layout/Nav";
+import { Footer } from "@/components/layout/Footer";
+import { Leaf, SteamSwirl } from "@/components/doodles";
+import { ServingsCalculator } from "@/components/recipe/ServingsCalculator";
+import { RecipeSteps } from "@/components/recipe/RecipeSteps";
+import { BotanicalFrame } from "@/components/ui/BotanicalFrame";
+
+interface Props {
+  params: Promise<{ lang: string; slug: string }>;
+}
+
+export async function generateStaticParams() {
+  return locales.flatMap((lang) =>
+    getAllRecipes(lang).map((r) => ({ lang, slug: r.slug }))
+  );
+}
+
+const tagColors: Record<string, string> = {
+  vegetarian: "#7A9E7E",
+  vegan: "#7A9E7E",
+  "high-protein": "#C9A84C",
+  quick: "#C46E72",
+  "gluten-free": "#C8B89A",
+  "anti-inflammatory": "#C9A84C",
+};
+
+export default async function RecipePage({ params }: Props) {
+  const { lang, slug } = await params;
+  const locale = lang as Locale;
+  const t = getT(locale);
+  const recipe = getRecipeBySlug(slug, locale);
+  if (!recipe) notFound();
+
+  const totalTime = recipe.prepTime + recipe.cookTime;
+
+  const heroImagePath = recipe.heroImage
+    ? path.join(process.cwd(), "public", recipe.heroImage)
+    : null;
+  const hasHeroImage = heroImagePath ? fs.existsSync(heroImagePath) : false;
+
+  return (
+    <>
+      <Nav lang={locale} />
+      <main className="flex-1 px-6 md:px-12 py-12">
+        <div className="max-w-2xl mx-auto">
+
+          <BotanicalFrame className="mb-10 px-6 pt-8 pb-6">
+            <div className="flex flex-wrap gap-2 mb-4">
+              {recipe.tags.map((tag) => (
+                <span key={tag} className="px-3 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: tagColors[tag] ?? "#C8B89A" }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+              {recipe.title}
+            </h1>
+            <p className="text-lg leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+              {recipe.description}
+            </p>
+          </BotanicalFrame>
+
+          {hasHeroImage && recipe.heroImage ? (
+            <div className="w-full h-64 md:h-80 rounded-2xl mb-8 overflow-hidden relative">
+              <Image
+                src={recipe.heroImage}
+                alt={recipe.title}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          ) : (
+            <div className="w-full h-64 md:h-80 rounded-2xl mb-8 flex items-center justify-center" style={{ backgroundColor: "#EDE9E1" }}>
+              <SteamSwirl size={48} color="#C8B89A" />
+            </div>
+          )}
+
+          {/* Quick info bar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 rounded-2xl p-6 mb-6" style={{ backgroundColor: "#EDE9E1" }}>
+            {[
+              { label: t.recipe.prep, value: `${recipe.prepTime} min` },
+              { label: t.recipe.cook, value: `${recipe.cookTime} min` },
+              { label: t.recipe.total, value: `${totalTime} min` },
+              { label: t.recipe.servings, value: `${recipe.servings}` },
+            ].map(({ label, value }) => (
+              <div key={label} className="text-center">
+                <p className="text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>{label}</p>
+                <p className="text-lg font-bold" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>{value}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 mb-10">
+            <span className="text-xs uppercase tracking-widest" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>{t.recipe.difficulty}:</span>
+            <span className="px-3 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: recipe.difficulty === "easy" ? "#7A9E7E" : recipe.difficulty === "medium" ? "#C9A84C" : "#C46E72" }}>
+              {t.recipe[recipe.difficulty]}
+            </span>
+          </div>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 mb-10 opacity-30">
+            <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
+            <Leaf size={16} color="#7A9E7E" />
+            <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
+          </div>
+
+          {/* Ingredients */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+              {t.recipe.ingredients}
+            </h2>
+            <ServingsCalculator baseServings={recipe.servings} ingredients={recipe.ingredients} t={{ servings: t.recipe.servings, reset: t.recipe.reset }} />
+          </section>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 mb-10 opacity-30">
+            <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
+            <Leaf size={16} color="#7A9E7E" />
+            <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
+          </div>
+
+          {/* Steps */}
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+              {t.recipe.method}
+            </h2>
+            <RecipeSteps steps={recipe.steps} stepWord={t.recipe.step} />
+          </section>
+
+          {/* Nutrition */}
+          {recipe.nutrition && (
+            <>
+              <div className="flex items-center gap-3 mb-10 opacity-30">
+                <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
+                <Leaf size={16} color="#7A9E7E" />
+                <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
+              </div>
+              <section className="mb-12">
+                <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+                  {t.recipe.nutrition} <span className="text-base font-normal" style={{ color: "#C8B89A" }}>{t.recipe.perServing}</span>
+                </h2>
+                <div className="grid grid-cols-4 gap-4">
+                  {[
+                    { label: "Calories", value: recipe.nutrition.calories, unit: "kcal" },
+                    { label: "Protein", value: recipe.nutrition.protein, unit: "g" },
+                    { label: "Carbs", value: recipe.nutrition.carbs, unit: "g" },
+                    { label: "Fat", value: recipe.nutrition.fat, unit: "g" },
+                  ].map(({ label, value, unit }) => (
+                    <div key={label} className="text-center rounded-xl py-4" style={{ backgroundColor: "#EDE9E1" }}>
+                      <p className="text-lg font-bold" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+                        {value}<span className="text-sm font-normal ml-0.5">{unit}</span>
+                      </p>
+                      <p className="text-xs mt-1" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>{label}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </>
+          )}
+
+          {recipe.videoUrl && (
+            <section className="mb-12">
+              <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>{t.recipe.watch}</h2>
+              <div className="aspect-video rounded-2xl overflow-hidden">
+                <iframe src={recipe.videoUrl} className="w-full h-full" allowFullScreen title={recipe.title} />
+              </div>
+            </section>
+          )}
+
+          <div className="pt-8 border-t" style={{ borderColor: "#EDE9E1" }}>
+            <a href={`/${locale}/recipes`} className="text-sm font-semibold transition-opacity hover:opacity-70" style={{ fontFamily: "var(--font-body)", color: "#7A9E7E" }}>
+              {t.recipe.back}
+            </a>
+          </div>
+        </div>
+      </main>
+      <Footer lang={locale} />
+    </>
+  );
+}
