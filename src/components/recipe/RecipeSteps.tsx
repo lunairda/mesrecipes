@@ -58,6 +58,8 @@ interface TimerState {
   running: boolean;
   done: boolean;
   label: string;
+  startedAt: number | null;
+  remainingAtStart: number;
 }
 
 interface Props {
@@ -69,40 +71,61 @@ export function RecipeSteps({ steps, stepWord }: Props) {
   const [timer, setTimer] = useState<TimerState | null>(null);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  function tick() {
+    setTimer((t) => {
+      if (!t || !t.running || t.done || t.startedAt === null) return t;
+      const elapsed = Math.floor((Date.now() - t.startedAt) / 1000);
+      const remaining = Math.max(0, t.remainingAtStart - elapsed);
+      if (remaining <= 0) {
+        clearInterval(intervalRef.current!);
+        playBeep();
+        return { ...t, remaining: 0, running: false, done: true, startedAt: null };
+      }
+      return { ...t, remaining };
+    });
+  }
+
   useEffect(() => {
     if (timer?.running && !timer.done) {
-      intervalRef.current = setInterval(() => {
-        setTimer((t) => {
-          if (!t) return null;
-          const next = t.remaining - 1;
-          if (next <= 0) {
-            clearInterval(intervalRef.current!);
-            playBeep();
-            return { ...t, remaining: 0, running: false, done: true };
-          }
-          return { ...t, remaining: next };
-        });
-      }, 1000);
+      intervalRef.current = setInterval(tick, 500);
     } else {
       if (intervalRef.current) clearInterval(intervalRef.current);
     }
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timer?.running, timer?.done]);
+
+  // Catch up when screen wakes from sleep
+  useEffect(() => {
+    function onVisible() {
+      if (document.visibilityState === "visible") tick();
+    }
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function startTimer(seconds: number, label: string) {
     if (intervalRef.current) clearInterval(intervalRef.current);
-    setTimer({ total: seconds, remaining: seconds, running: true, done: false, label });
+    setTimer({ total: seconds, remaining: seconds, running: true, done: false, label, startedAt: Date.now(), remainingAtStart: seconds });
   }
 
   function togglePause() {
-    setTimer((t) => (t ? { ...t, running: !t.running } : null));
+    setTimer((t) => {
+      if (!t) return null;
+      if (t.running) {
+        return { ...t, running: false, startedAt: null };
+      } else {
+        return { ...t, running: true, startedAt: Date.now(), remainingAtStart: t.remaining };
+      }
+    });
   }
 
   function resetTimer() {
     if (intervalRef.current) clearInterval(intervalRef.current);
-    setTimer((t) => (t ? { ...t, remaining: t.total, running: false, done: false } : null));
+    setTimer((t) => t ? { ...t, remaining: t.total, running: false, done: false, startedAt: null, remainingAtStart: t.total } : null);
   }
 
   function closeTimer() {
