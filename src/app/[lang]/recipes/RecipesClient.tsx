@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Recipe } from "@/types/recipe";
 import type { Translations } from "@/lib/i18n";
 import { Bowl } from "@/components/doodles";
@@ -20,9 +21,10 @@ interface Props {
   allTags: string[];
   t: Translations["recipes"];
   locale: string;
+  imageMap: Record<string, string>;
 }
 
-export function RecipesClient({ recipes, allTags, t, locale }: Props) {
+export function RecipesClient({ recipes, allTags, t, locale, imageMap }: Props) {
   const [search, setSearch] = useState("");
   const [activeTag, setActiveTag] = useState<string | null>(null);
 
@@ -85,8 +87,18 @@ export function RecipesClient({ recipes, allTags, t, locale }: Props) {
               className="group block rounded-2xl p-6 transition-shadow hover:shadow-md"
               style={{ backgroundColor: "#EDE9E1" }}
             >
-              <div className="w-full h-40 rounded-xl mb-5 flex items-center justify-center" style={{ backgroundColor: "#FAF7F2" }}>
-                <Bowl size={48} color="#C8B89A" />
+              <div className="w-full aspect-square rounded-xl mb-5 overflow-hidden relative flex items-center justify-center" style={{ backgroundColor: "#FAF7F2" }}>
+                {imageMap[recipe.slug] ? (
+                  <Image
+                    src={imageMap[recipe.slug]}
+                    alt={recipe.title}
+                    fill
+                    className="object-cover"
+                    style={{ objectPosition: recipe.heroImageFocus === "top" ? "center 20%" : recipe.heroImageFocus === "bottom" ? "center 80%" : "center" }}
+                  />
+                ) : (
+                  <Bowl size={48} color="#C8B89A" />
+                )}
               </div>
               <div className="flex flex-wrap gap-2 mb-3">
                 {recipe.tags.slice(0, 2).map((tag) => (

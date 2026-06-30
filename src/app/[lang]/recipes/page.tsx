@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { getAllRecipes, getAllTags } from "@/lib/recipes";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -16,6 +18,14 @@ export default async function RecipesPage({ params }: Props) {
   const recipes = getAllRecipes(locale);
   const allTags = getAllTags(locale);
 
+  const imageMap: Record<string, string> = {};
+  for (const recipe of recipes) {
+    if (recipe.heroImage) {
+      const full = path.join(process.cwd(), "public", recipe.heroImage);
+      if (fs.existsSync(full)) imageMap[recipe.slug] = recipe.heroImage;
+    }
+  }
+
   return (
     <>
       <Nav lang={locale} />
@@ -30,7 +40,7 @@ export default async function RecipesPage({ params }: Props) {
           <p className="mb-12 text-base" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
             {t.recipes.subtitle}
           </p>
-          <RecipesClient recipes={recipes} allTags={allTags} t={t.recipes} locale={locale} />
+          <RecipesClient recipes={recipes} allTags={allTags} t={t.recipes} locale={locale} imageMap={imageMap} />
         </div>
       </main>
       <Footer lang={locale} />

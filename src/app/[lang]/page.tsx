@@ -1,4 +1,7 @@
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
+import Image from "next/image";
 import { Leaf, Lemon, Whisk, Bowl, HerbSprig } from "@/components/doodles";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
@@ -93,9 +96,25 @@ export default async function Home({ params }: Props) {
                   className="group block rounded-2xl p-6 transition-shadow hover:shadow-md"
                   style={{ backgroundColor: "#EDE9E1" }}
                 >
-                  <div className="w-full h-40 rounded-xl mb-5 flex items-center justify-center" style={{ backgroundColor: "#FAF7F2" }}>
-                    <Bowl size={48} color="#C8B89A" />
-                  </div>
+                  {(() => {
+                    const imgPath = recipe.heroImage ? path.join(process.cwd(), "public", recipe.heroImage) : null;
+                    const hasImg = imgPath ? fs.existsSync(imgPath) : false;
+                    return hasImg && recipe.heroImage ? (
+                      <div className="w-full aspect-square rounded-xl mb-5 overflow-hidden relative">
+                        <Image
+                          src={recipe.heroImage}
+                          alt={recipe.title}
+                          fill
+                          className="object-cover"
+                          style={{ objectPosition: recipe.heroImageFocus === "top" ? "center 20%" : recipe.heroImageFocus === "bottom" ? "center 80%" : "center" }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-full aspect-square rounded-xl mb-5 flex items-center justify-center" style={{ backgroundColor: "#FAF7F2" }}>
+                        <Bowl size={48} color="#C8B89A" />
+                      </div>
+                    );
+                  })()}
                   <div className="flex flex-wrap gap-2 mb-3">
                     {recipe.tags.slice(0, 2).map((tag) => (
                       <span key={tag} className="px-3 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: tagColors[tag] ?? "#C8B89A" }}>
