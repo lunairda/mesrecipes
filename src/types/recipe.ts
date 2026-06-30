@@ -10,6 +10,7 @@ export const RecipeSchema = z.object({
   difficulty: z.enum(["easy", "medium", "hard"]),
   tags: z.array(z.string()),
   heroImage: z.string().optional(),
+  heroImageFocus: z.enum(["top", "center", "bottom"]).default("center"),
   videoUrl: z.string().optional(),
   featured: z.boolean().default(false),
   nutrition: z

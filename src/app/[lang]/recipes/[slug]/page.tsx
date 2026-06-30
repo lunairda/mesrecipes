@@ -67,17 +67,18 @@ export default async function RecipePage({ params }: Props) {
           </BotanicalFrame>
 
           {hasHeroImage && recipe.heroImage ? (
-            <div className="w-full h-64 md:h-80 rounded-2xl mb-8 overflow-hidden relative">
+            <div className="w-full aspect-square rounded-2xl mb-8 overflow-hidden relative">
               <Image
                 src={recipe.heroImage}
                 alt={recipe.title}
                 fill
                 className="object-cover"
+                style={{ objectPosition: recipe.heroImageFocus === "top" ? "center 20%" : recipe.heroImageFocus === "bottom" ? "center 80%" : "center" }}
                 priority
               />
             </div>
           ) : (
-            <div className="w-full h-64 md:h-80 rounded-2xl mb-8 flex items-center justify-center" style={{ backgroundColor: "#EDE9E1" }}>
+            <div className="w-full aspect-[4/3] rounded-2xl mb-8 flex items-center justify-center" style={{ backgroundColor: "#EDE9E1" }}>
               <SteamSwirl size={48} color="#C8B89A" />
             </div>
           )}
