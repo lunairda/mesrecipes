@@ -10,9 +10,10 @@ export function proxy(request: NextRequest) {
   );
   if (hasLocale) return NextResponse.next();
 
-  // Skip Next.js internals and static files
+  // Skip Next.js internals, API routes, and static files
   if (
     pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
     pathname.startsWith("/images") ||
     pathname.startsWith("/fonts") ||
     pathname.includes(".")
