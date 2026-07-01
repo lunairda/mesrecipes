@@ -37,7 +37,7 @@ export default async function RecipesPage({ params }: Props) {
               {t.recipes.title}
             </h1>
           </div>
-          <p className="mb-12 text-base" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
+          <p className="mb-6 text-base" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
             {t.recipes.subtitle}
           </p>
           <RecipesClient recipes={recipes} allTags={allTags} t={t.recipes} locale={locale} imageMap={imageMap} />
