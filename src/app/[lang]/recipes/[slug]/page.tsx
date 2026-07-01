@@ -12,6 +12,7 @@ import { RecipeSteps } from "@/components/recipe/RecipeSteps";
 import { BotanicalFrame } from "@/components/ui/BotanicalFrame";
 import { FavouriteButton } from "@/components/recipe/FavouriteButton";
 import { PrintButton } from "@/components/recipe/PrintButton";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 interface Props {
   params: Promise<{ lang: string; slug: string }>;
@@ -52,6 +53,7 @@ export default async function RecipePage({ params }: Props) {
       <main className="flex-1 px-6 md:px-12 py-12">
         <div className="max-w-2xl mx-auto">
 
+          <FadeUp>
           <BotanicalFrame className="mb-10 px-6 pt-8 pb-6">
             <div className="flex flex-wrap gap-2 mb-4">
               {recipe.tags.map((tag) => (
@@ -67,12 +69,15 @@ export default async function RecipePage({ params }: Props) {
               {recipe.description}
             </p>
           </BotanicalFrame>
+          </FadeUp>
 
           {/* Action buttons */}
+          <FadeUp delay={0.08}>
           <div className="print-hide flex items-center gap-3 mb-8">
             <FavouriteButton slug={recipe.slug} saveLabel={t.recipe.save} savedLabel={t.recipe.saved} />
             <PrintButton label={t.recipe.print} />
           </div>
+          </FadeUp>
 
           {hasHeroImage && recipe.heroImage ? (
             <div className="recipe-hero w-full aspect-square rounded-2xl mb-8 overflow-hidden relative">

@@ -9,7 +9,7 @@ export function PrintButton({ label }: Props) {
     <button
       onClick={() => window.print()}
       aria-label={label}
-      className="print-hide flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-80 cursor-pointer"
+      className="print-hide flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-80 active:scale-95 cursor-pointer"
       style={{
         backgroundColor: "#EDE9E1",
         color: "#2C3A2C",

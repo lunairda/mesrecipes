@@ -28,7 +28,9 @@
       "Bash(git branch *)",
       "Bash(git push *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/en)",
-      "Bash(md5 /Users/azizekaya/Documents/Mesrecipes/public/images/recipes/strawberry-red-bean-mochi.jpg)"
+      "Bash(md5 /Users/azizekaya/Documents/Mesrecipes/public/images/recipes/strawberry-red-bean-mochi.jpg)",
+      "Bash(mkdir -p /Users/azizekaya/Documents/Mesrecipes/src/hooks && mkdir -p \"/Users/azizekaya/Documents/Mesrecipes/src/app/[lang]/saved\")",
+      "Bash(npx tsc *)"
     ]
   }
 }

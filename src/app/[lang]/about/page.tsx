@@ -5,6 +5,7 @@ import { Leaf, Lemon, HerbSprig, Bowl } from "@/components/doodles";
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
 import { getT, type Locale } from "@/lib/i18n";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 interface Props {
   params: Promise<{ lang: string }>;
@@ -103,15 +104,17 @@ export default async function AboutPage({ params }: Props) {
       <main className="flex-1 px-6 md:px-12 py-16">
         <div className="max-w-2xl mx-auto">
 
-          <div className="flex items-center gap-3 mb-2">
-            <HerbSprig size={28} color="#7A9E7E" />
-            <h1 className="text-4xl md:text-5xl font-bold" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
-              {t.about.title}
-            </h1>
-          </div>
-          <p className="text-base mb-12" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
-            {t.about.subtitle}
-          </p>
+          <FadeUp>
+            <div className="flex items-center gap-3 mb-2">
+              <HerbSprig size={28} color="#7A9E7E" />
+              <h1 className="text-4xl md:text-5xl font-bold" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+                {t.about.title}
+              </h1>
+            </div>
+            <p className="text-base mb-12" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
+              {t.about.subtitle}
+            </p>
+          </FadeUp>
 
           {hasPhoto && photoSrc ? (
             <div className="w-full h-80 rounded-2xl mb-12 overflow-hidden relative">
@@ -130,6 +133,7 @@ export default async function AboutPage({ params }: Props) {
             </div>
           )}
 
+          <FadeUp delay={0.05}>
           <div className="flex flex-col gap-6 text-base leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#2C3A2C" }}>
             {isFr ? (
               <>
@@ -147,6 +151,7 @@ export default async function AboutPage({ params }: Props) {
               </>
             )}
           </div>
+          </FadeUp>
 
           <div className="flex items-center gap-4 my-12 opacity-40">
             <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
@@ -159,14 +164,16 @@ export default async function AboutPage({ params }: Props) {
           <h2 className="text-2xl font-bold mb-6" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
             {t.about.factsTitle}
           </h2>
-          <ul className="flex flex-col gap-5">
-            {facts.map(({ icon, text }) => (
-              <li key={text} className="flex items-start gap-4 text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#2C3A2C" }}>
-                <span className="flex-shrink-0 mt-0.5">{icon}</span>
-                <span>{text}</span>
-              </li>
+          <div className="flex flex-col gap-5">
+            {facts.map(({ icon, text }, i) => (
+              <FadeUp key={text} delay={i * 0.07}>
+                <div className="flex items-start gap-4 text-sm leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#2C3A2C" }}>
+                  <span className="flex-shrink-0 mt-0.5">{icon}</span>
+                  <span>{text}</span>
+                </div>
+              </FadeUp>
             ))}
-          </ul>
+          </div>
 
           <div className="mt-14 pt-10 border-t" style={{ borderColor: "#EDE9E1" }}>
             <div className="flex items-center gap-3">

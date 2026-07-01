@@ -6,6 +6,7 @@ import Image from "next/image";
 import type { Recipe } from "@/types/recipe";
 import type { Translations } from "@/lib/i18n";
 import { Bowl } from "@/components/doodles";
+import { FadeUp } from "@/components/ui/FadeUp";
 
 const tagColors: Record<string, string> = {
   vegetarian: "#7A9E7E",
@@ -51,7 +52,7 @@ export function RecipesClient({ recipes, allTags, t, locale, imageMap }: Props) 
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setActiveTag(null)}
-            className="px-4 py-1.5 rounded-full text-xs font-semibold"
+            className="px-4 py-1.5 rounded-full text-xs font-semibold transition-all active:scale-95"
             style={{ backgroundColor: activeTag === null ? "#2C3A2C" : "#EDE9E1", color: activeTag === null ? "#FAF7F2" : "#2C3A2C", fontFamily: "var(--font-body)" }}
           >
             {t.all}
@@ -60,7 +61,7 @@ export function RecipesClient({ recipes, allTags, t, locale, imageMap }: Props) 
             <button
               key={tag}
               onClick={() => setActiveTag(activeTag === tag ? null : tag)}
-              className="px-4 py-1.5 rounded-full text-xs font-semibold hover:opacity-80"
+              className="px-4 py-1.5 rounded-full text-xs font-semibold hover:opacity-80 transition-all active:scale-95"
               style={{ backgroundColor: activeTag === tag ? (tagColors[tag] ?? "#C8B89A") : "#EDE9E1", color: activeTag === tag ? "#fff" : "#2C3A2C", fontFamily: "var(--font-body)" }}
             >
               {tag}
@@ -80,44 +81,45 @@ export function RecipesClient({ recipes, allTags, t, locale, imageMap }: Props) 
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((recipe) => (
-            <Link
-              key={recipe.slug}
-              href={`/${locale}/recipes/${recipe.slug}`}
-              className="group block rounded-2xl p-6 transition-shadow hover:shadow-md"
-              style={{ backgroundColor: "#EDE9E1" }}
-            >
-              <div className="w-full aspect-square rounded-xl mb-5 overflow-hidden relative flex items-center justify-center" style={{ backgroundColor: "#FAF7F2" }}>
-                {imageMap[recipe.slug] ? (
-                  <Image
-                    src={imageMap[recipe.slug]}
-                    alt={recipe.title}
-                    fill
-                    className="object-cover"
-                    style={{ objectPosition: recipe.heroImageFocus === "top" ? "center 20%" : recipe.heroImageFocus === "bottom" ? "center 80%" : "center" }}
-                  />
-                ) : (
-                  <Bowl size={48} color="#C8B89A" />
-                )}
-              </div>
-              <div className="flex flex-wrap gap-2 mb-3">
-                {recipe.tags.slice(0, 2).map((tag) => (
-                  <span key={tag} className="px-3 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: tagColors[tag] ?? "#C8B89A" }}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-              <h2 className="text-lg font-bold mb-1 group-hover:opacity-75 transition-opacity" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
-                {recipe.title}
-              </h2>
-              <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
-                {recipe.description}
-              </p>
-              <div className="flex items-center gap-4 text-xs" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
-                <span>⏱ {recipe.prepTime + recipe.cookTime} min</span>
-                <span>· {recipe.servings} {locale === "fr" ? "portions" : "servings"}</span>
-              </div>
-            </Link>
+          {filtered.map((recipe, i) => (
+            <FadeUp key={recipe.slug} delay={i * 0.06}>
+              <Link
+                href={`/${locale}/recipes/${recipe.slug}`}
+                className="group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                style={{ backgroundColor: "#EDE9E1" }}
+              >
+                <div className="w-full aspect-square rounded-xl mb-5 overflow-hidden relative flex items-center justify-center" style={{ backgroundColor: "#FAF7F2" }}>
+                  {imageMap[recipe.slug] ? (
+                    <Image
+                      src={imageMap[recipe.slug]}
+                      alt={recipe.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{ objectPosition: recipe.heroImageFocus === "top" ? "center 20%" : recipe.heroImageFocus === "bottom" ? "center 80%" : "center" }}
+                    />
+                  ) : (
+                    <Bowl size={48} color="#C8B89A" />
+                  )}
+                </div>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {recipe.tags.slice(0, 2).map((tag) => (
+                    <span key={tag} className="px-3 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: tagColors[tag] ?? "#C8B89A" }}>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h2 className="text-lg font-bold mb-1 group-hover:opacity-75 transition-opacity" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+                  {recipe.title}
+                </h2>
+                <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
+                  {recipe.description}
+                </p>
+                <div className="flex items-center gap-4 text-xs" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
+                  <span>⏱ {recipe.prepTime + recipe.cookTime} min</span>
+                  <span>· {recipe.servings} {locale === "fr" ? "portions" : "servings"}</span>
+                </div>
+              </Link>
+            </FadeUp>
           ))}
         </div>
       )}

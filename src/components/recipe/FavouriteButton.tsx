@@ -15,7 +15,7 @@ export function FavouriteButton({ slug, saveLabel, savedLabel }: Props) {
     <button
       onClick={() => toggle(slug)}
       aria-label={saved ? savedLabel : saveLabel}
-      className="print-hide flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-80 cursor-pointer"
+      className="print-hide flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all hover:opacity-80 active:scale-95 cursor-pointer"
       style={{
         backgroundColor: saved ? "#C46E72" : "#EDE9E1",
         color: saved ? "#fff" : "#2C3A2C",
