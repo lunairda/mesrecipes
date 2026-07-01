@@ -54,7 +54,7 @@ export default async function Home({ params }: Props) {
             >
               {t.home.hero1}
             </h1>
-            <p className="text-lg md:text-xl mb-10" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+            <p className="text-lg md:text-xl mb-10" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
               {t.home.hero2}
             </p>
             <Link
@@ -125,10 +125,10 @@ export default async function Home({ params }: Props) {
                   <h3 className="text-lg font-bold mb-1 group-hover:opacity-75 transition-opacity" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
                     {recipe.title}
                   </h3>
-                  <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+                  <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
                     {recipe.description}
                   </p>
-                  <div className="flex items-center gap-4 text-xs" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+                  <div className="flex items-center gap-4 text-xs" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
                     <span>⏱ {recipe.prepTime + recipe.cookTime} min</span>
                     <span>· {t.recipe[recipe.difficulty]}</span>
                   </div>

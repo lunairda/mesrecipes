@@ -69,14 +69,14 @@ export function RecipesClient({ recipes, allTags, t, locale, imageMap }: Props) 
         </div>
       </div>
 
-      <p className="text-xs mb-6" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+      <p className="text-xs mb-6" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
         {filtered.length} {filtered.length !== 1 ? t.resultsPlural : t.resultsSingular}
       </p>
 
       {filtered.length === 0 ? (
         <div className="text-center py-24">
           <Bowl size={48} color="#EDE9E1" className="mx-auto mb-4" />
-          <p style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>{t.noResults}</p>
+          <p style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>{t.noResults}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -110,10 +110,10 @@ export function RecipesClient({ recipes, allTags, t, locale, imageMap }: Props) 
               <h2 className="text-lg font-bold mb-1 group-hover:opacity-75 transition-opacity" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
                 {recipe.title}
               </h2>
-              <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+              <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
                 {recipe.description}
               </p>
-              <div className="flex items-center gap-4 text-xs" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+              <div className="flex items-center gap-4 text-xs" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
                 <span>⏱ {recipe.prepTime + recipe.cookTime} min</span>
                 <span>· {recipe.servings} {locale === "fr" ? "portions" : "servings"}</span>
               </div>

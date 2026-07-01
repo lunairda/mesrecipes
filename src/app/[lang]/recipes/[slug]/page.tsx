@@ -10,6 +10,8 @@ import { Leaf, SteamSwirl } from "@/components/doodles";
 import { ServingsCalculator } from "@/components/recipe/ServingsCalculator";
 import { RecipeSteps } from "@/components/recipe/RecipeSteps";
 import { BotanicalFrame } from "@/components/ui/BotanicalFrame";
+import { FavouriteButton } from "@/components/recipe/FavouriteButton";
+import { PrintButton } from "@/components/recipe/PrintButton";
 
 interface Props {
   params: Promise<{ lang: string; slug: string }>;
@@ -61,13 +63,19 @@ export default async function RecipePage({ params }: Props) {
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
               {recipe.title}
             </h1>
-            <p className="text-lg leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+            <p className="text-lg leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
               {recipe.description}
             </p>
           </BotanicalFrame>
 
+          {/* Action buttons */}
+          <div className="print-hide flex items-center gap-3 mb-8">
+            <FavouriteButton slug={recipe.slug} saveLabel={t.recipe.save} savedLabel={t.recipe.saved} />
+            <PrintButton label={t.recipe.print} />
+          </div>
+
           {hasHeroImage && recipe.heroImage ? (
-            <div className="w-full aspect-square rounded-2xl mb-8 overflow-hidden relative">
+            <div className="recipe-hero w-full aspect-square rounded-2xl mb-8 overflow-hidden relative">
               <Image
                 src={recipe.heroImage}
                 alt={recipe.title}
@@ -92,28 +100,28 @@ export default async function RecipePage({ params }: Props) {
               { label: t.recipe.servings, value: `${recipe.servings}` },
             ].map(({ label, value }) => (
               <div key={label} className="text-center">
-                <p className="text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>{label}</p>
+                <p className="text-xs uppercase tracking-widest mb-1" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>{label}</p>
                 <p className="text-lg font-bold" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>{value}</p>
               </div>
             ))}
           </div>
 
-          <div className="flex items-center gap-2 mb-10">
-            <span className="text-xs uppercase tracking-widest" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>{t.recipe.difficulty}:</span>
+          <div className="flex items-center gap-2 mb-5">
+            <span className="text-xs uppercase tracking-widest" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>{t.recipe.difficulty}:</span>
             <span className="px-3 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: recipe.difficulty === "easy" ? "#7A9E7E" : recipe.difficulty === "medium" ? "#C9A84C" : "#C46E72" }}>
               {t.recipe[recipe.difficulty]}
             </span>
           </div>
 
           {/* Divider */}
-          <div className="flex items-center gap-3 mb-10 opacity-30">
+          <div className="flex items-center gap-3 mb-6 opacity-30">
             <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
             <Leaf size={16} color="#7A9E7E" />
             <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
           </div>
 
           {/* Ingredients */}
-          <section className="mb-8">
+          <section className="mb-5">
             <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
               {t.recipe.ingredients}
             </h2>
@@ -121,7 +129,7 @@ export default async function RecipePage({ params }: Props) {
           </section>
 
           {/* Divider */}
-          <div className="flex items-center gap-3 mb-10 opacity-30">
+          <div className="flex items-center gap-3 mb-6 opacity-30">
             <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
             <Leaf size={16} color="#7A9E7E" />
             <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
@@ -145,7 +153,7 @@ export default async function RecipePage({ params }: Props) {
               </div>
               <section className="mb-12">
                 <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
-                  {t.recipe.nutrition} <span className="text-base font-normal" style={{ color: "#C8B89A" }}>{t.recipe.perServing}</span>
+                  {t.recipe.nutrition} <span className="text-base font-normal" style={{ color: "#6B5C4A" }}>{t.recipe.perServing}</span>
                 </h2>
                 <div className="grid grid-cols-4 gap-4">
                   {[
@@ -158,7 +166,7 @@ export default async function RecipePage({ params }: Props) {
                       <p className="text-lg font-bold" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
                         {value}<span className="text-sm font-normal ml-0.5">{unit}</span>
                       </p>
-                      <p className="text-xs mt-1" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>{label}</p>
+                      <p className="text-xs mt-1" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>{label}</p>
                     </div>
                   ))}
                 </div>
@@ -175,7 +183,7 @@ export default async function RecipePage({ params }: Props) {
             </section>
           )}
 
-          <div className="pt-8 border-t" style={{ borderColor: "#EDE9E1" }}>
+          <div className="print-hide pt-8 border-t" style={{ borderColor: "#EDE9E1" }}>
             <a href={`/${locale}/recipes`} className="text-sm font-semibold transition-opacity hover:opacity-70" style={{ fontFamily: "var(--font-body)", color: "#7A9E7E" }}>
               {t.recipe.back}
             </a>

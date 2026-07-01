@@ -109,7 +109,7 @@ export default async function AboutPage({ params }: Props) {
               {t.about.title}
             </h1>
           </div>
-          <p className="text-base mb-12" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>
+          <p className="text-base mb-12" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
             {t.about.subtitle}
           </p>
 
@@ -126,7 +126,7 @@ export default async function AboutPage({ params }: Props) {
           ) : (
             <div className="w-full h-64 rounded-2xl mb-12 flex flex-col items-center justify-center gap-3" style={{ backgroundColor: "#EDE9E1" }}>
               <Bowl size={48} color="#C8B89A" />
-              <span className="text-xs" style={{ fontFamily: "var(--font-body)", color: "#C8B89A" }}>{t.about.photoSoon}</span>
+              <span className="text-xs" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>{t.about.photoSoon}</span>
             </div>
           )}
 

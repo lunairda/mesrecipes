@@ -203,7 +203,7 @@ export function RecipeSteps({ steps, stepWord }: Props) {
 
       {timer && (
         <div
-          className="fixed bottom-6 right-6 z-50 rounded-2xl shadow-2xl p-5 w-44"
+          className="print-hide fixed bottom-6 right-6 z-50 rounded-2xl shadow-2xl p-5 w-44"
           style={{ backgroundColor: "#FAF7F2", border: "1.5px solid #EDE9E1" }}
         >
           {/* Header */}

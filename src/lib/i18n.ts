@@ -7,6 +7,8 @@ export const translations = {
     nav: {
       recipes: "Recipes",
       about: "About",
+      saved: "Saved",
+      contact: "Contact",
     },
     home: {
       hero1: "Good food doesn't have to be complicated.",
@@ -41,12 +43,31 @@ export const translations = {
       medium: "medium",
       hard: "hard",
       step: "Step",
+      save: "Save recipe",
+      saved: "Saved",
+      print: "Save as PDF",
     },
     about: {
       title: "Hi, I'm Azi.",
       subtitle: "27 · Turkish · Based in Paris",
       photoSoon: "photo coming soon",
       factsTitle: "A few things about me",
+    },
+    saved: {
+      title: "Saved Recipes",
+      empty: "No saved recipes yet. Find something you love!",
+      emptyLink: "Explore recipes →",
+    },
+    contact: {
+      title: "Get in touch",
+      subtitle: "A question, a suggestion, or just want to say hi? Send me a message — I'd love to hear from you.",
+      name: "Your name",
+      email: "Your email",
+      message: "Your message",
+      send: "Send message",
+      sending: "Sending…",
+      success: "Message sent! I'll get back to you soon.",
+      error: "Something went wrong. Please try again.",
     },
     footer: {
       tagline: "Seasoned with joy.",
@@ -56,6 +77,8 @@ export const translations = {
     nav: {
       recipes: "Recettes",
       about: "À propos",
+      saved: "Sauvegardés",
+      contact: "Contact",
     },
     home: {
       hero1: "La bonne cuisine n'a pas besoin d'être compliquée.",
@@ -90,12 +113,31 @@ export const translations = {
       medium: "moyen",
       hard: "difficile",
       step: "Étape",
+      save: "Sauvegarder",
+      saved: "Sauvegardé",
+      print: "Enregistrer en PDF",
     },
     about: {
       title: "Bonjour, je suis Azi.",
       subtitle: "27 ans · Turque · Basée à Paris",
       photoSoon: "photo bientôt disponible",
       factsTitle: "Quelques choses sur moi",
+    },
+    saved: {
+      title: "Recettes sauvegardées",
+      empty: "Aucune recette sauvegardée. Trouvez ce que vous aimez !",
+      emptyLink: "Explorer les recettes →",
+    },
+    contact: {
+      title: "Me contacter",
+      subtitle: "Une question, une suggestion, ou juste envie de dire bonjour ? Envoyez-moi un message.",
+      name: "Votre prénom",
+      email: "Votre adresse email",
+      message: "Votre message",
+      send: "Envoyer",
+      sending: "Envoi en cours…",
+      success: "Message envoyé ! Je vous répondrai bientôt.",
+      error: "Une erreur s'est produite. Réessayez ?",
     },
     footer: {
       tagline: "Assaisonné de joie.",
