@@ -79,6 +79,7 @@ export default async function RecipePage({ params }: Props) {
           </div>
           </FadeUp>
 
+          <FadeUp delay={0.05}>
           {hasHeroImage && recipe.heroImage ? (
             <div className="recipe-hero w-full aspect-square rounded-2xl mb-8 overflow-hidden relative">
               <Image
@@ -95,8 +96,10 @@ export default async function RecipePage({ params }: Props) {
               <SteamSwirl size={48} color="#C8B89A" />
             </div>
           )}
+          </FadeUp>
 
           {/* Quick info bar */}
+          <FadeUp>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 rounded-2xl p-6 mb-6" style={{ backgroundColor: "#EDE9E1" }}>
             {[
               { label: t.recipe.prep, value: `${recipe.prepTime} min` },
@@ -110,13 +113,17 @@ export default async function RecipePage({ params }: Props) {
               </div>
             ))}
           </div>
+          </FadeUp>
 
+          <FadeUp delay={0.05}>
           <div className="flex items-center gap-2 mb-5">
             <span className="text-xs uppercase tracking-widest" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>{t.recipe.difficulty}:</span>
             <span className="px-3 py-0.5 rounded-full text-xs font-semibold text-white" style={{ backgroundColor: recipe.difficulty === "easy" ? "#7A9E7E" : recipe.difficulty === "medium" ? "#C9A84C" : "#C46E72" }}>
               {t.recipe[recipe.difficulty]}
             </span>
           </div>
+
+          </FadeUp>
 
           {/* Divider */}
           <div className="flex items-center gap-3 mb-6 opacity-30">
@@ -126,12 +133,14 @@ export default async function RecipePage({ params }: Props) {
           </div>
 
           {/* Ingredients */}
+          <FadeUp>
           <section className="mb-5">
             <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
               {t.recipe.ingredients}
             </h2>
             <ServingsCalculator baseServings={recipe.servings} ingredients={recipe.ingredients} t={{ servings: t.recipe.servings, reset: t.recipe.reset }} />
           </section>
+          </FadeUp>
 
           {/* Divider */}
           <div className="flex items-center gap-3 mb-6 opacity-30">
@@ -141,15 +150,18 @@ export default async function RecipePage({ params }: Props) {
           </div>
 
           {/* Steps */}
+          <FadeUp>
           <section className="mb-8">
             <h2 className="text-2xl font-bold mb-5" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
               {t.recipe.method}
             </h2>
             <RecipeSteps steps={recipe.steps} stepWord={t.recipe.step} />
           </section>
+          </FadeUp>
 
           {/* Nutrition */}
           {recipe.nutrition && (
+            <FadeUp>
             <>
               <div className="flex items-center gap-3 mb-10 opacity-30">
                 <div className="flex-1 h-px" style={{ backgroundColor: "#C8B89A" }} />
@@ -177,6 +189,7 @@ export default async function RecipePage({ params }: Props) {
                 </div>
               </section>
             </>
+            </FadeUp>
           )}
 
           {recipe.videoUrl && (
