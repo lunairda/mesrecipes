@@ -74,7 +74,7 @@ const factsEn = [
 const factsFr = [
   { icon: <MusicNote />, text: "Je cuisine exclusivement sur une playlist très forte, très énergique. Le genre qui donne envie de danser et libère l'âme." },
   { icon: <Suitcase />, text: "J'adore explorer de nouveaux endroits, et la nourriture finit toujours par être ce dont je me souviens le plus. Il y a quelque chose de particulier à manger un plat et à vraiment comprendre la culture dont il vient." },
-  { icon: <Chopsticks />, text: "La cuisine asiatique est l'un de mes terriers préférés. Elle est tellement vaste et complexe que j'ai l'impression d'en être encore aux prémices — et c'est exactement pour ça que j'y reviens sans cesse." },
+  { icon: <Chopsticks />, text: "La cuisine asiatique est l'un de mes grands terrains d'exploration. Elle est si vaste et si complexe que j'ai l'impression d'en effleurer à peine la surface — et c'est précisément pour ça que j'y reviens sans cesse." },
   { icon: <Croissant />, text: "Les pâtisseries françaises sont ma faiblesse. Vivre à Paris n'arrange rien." },
   { icon: <TeaCup />, text: "La cuisine turque est ma zone de confort. L'odeur d'une bonne mercimek çorbası me ramène toujours à la maison." },
 ];
@@ -144,10 +144,10 @@ export default async function AboutPage({ params }: Props) {
           <div className="flex flex-col gap-6 text-base leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#2C3A2C" }}>
             {locale === "fr" ? (
               <>
-                <p>J&apos;étais autrefois la personne la plus difficile de la pièce. Et honnêtement ? Je le suis encore un peu, mais quelque part en chemin, être difficile s&apos;est transformé en curiosité.</p>
-                <p>Grandir en Turquie, partir en master en Angleterre, et maintenant vivre à Paris m&apos;a donné la plus belle des excuses pour explorer des cultures culinaires très différentes. Chaque ville, chaque voyage, chaque dîner chez des amis m&apos;a appris quelque chose de nouveau.</p>
-                <p>Ce que je préfère faire après avoir goûté un plat que j&apos;adore, c&apos;est rentrer à la maison et le reproduire. Parfois simplifié, parfois rendu un peu plus sain, parfois juste retouché jusqu&apos;à ce qu&apos;il me ressemble. Je ne mange pas de viande rouge, donc beaucoup de mes recettes vont naturellement dans ce sens, mais l&apos;objectif est toujours le même : une cuisine vraiment délicieuse qui fait du bien.</p>
-                <p>J&apos;ai créé ce site parce que je perdais mes recettes. Des notes griffonnées, des onglets oubliés, des proportions à moitié mémorisées. Mes Recipes, c&apos;est ma façon de les garder, et de les partager avec ceux qui pourraient les aimer aussi.</p>
+                <p>J&apos;ai longtemps été la plus difficile de la pièce à table. Et honnêtement ? Je le suis encore un peu — mais à un moment, cette difficulté s&apos;est transformée en curiosité.</p>
+                <p>Grandir à Istanbul, partir en master en Angleterre, et vivre maintenant à Paris tout en voyageant souvent m&apos;a offert le plus beau des prétextes pour explorer des cultures culinaires très différentes. Chaque ville, chaque voyage, chaque dîner chez des amis m&apos;a appris quelque chose de nouveau.</p>
+                <p>L&apos;une de mes plus grandes passions aujourd&apos;hui, c&apos;est de goûter un plat que j&apos;adore — ou dont je tombe amoureuse — et de rentrer chez moi pour le reconstituer. Parfois simplifié, parfois rendu un peu plus léger, parfois retouché jusqu&apos;à ce qu&apos;il me ressemble. Je ne mange pas de viande rouge, donc beaucoup de mes recettes vont naturellement dans ce sens — mais l&apos;objectif est toujours le même : une cuisine vraiment délicieuse qui fait du bien.</p>
+                <p>Si j&apos;ai créé ce site, c&apos;est parce que je perdais mes recettes. Des notes griffonnées, des onglets oubliés, des proportions à moitié mémorisées qui me coûtaient un temps fou à retrouver. Aujourd&apos;hui, Mes Recipes, c&apos;est ma façon de les garder — et peut-être de les partager avec ceux qui pourraient les aimer aussi.</p>
               </>
             ) : locale === "tr" ? (
               <>
