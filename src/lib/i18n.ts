@@ -47,6 +47,7 @@ export const translations = {
       saved: "Saved",
       print: "Save as PDF",
       makeFromScratch: "Want to make it from scratch?",
+      glutenFreeLabel: "Gluten-free swap",
     },
     about: {
       title: "Hi, I'm Azi.",
@@ -118,6 +119,7 @@ export const translations = {
       saved: "Sauvegardé",
       print: "Enregistrer en PDF",
       makeFromScratch: "Envie de le faire maison ?",
+      glutenFreeLabel: "Version sans gluten",
     },
     about: {
       title: "Bonjour, je suis Azi.",

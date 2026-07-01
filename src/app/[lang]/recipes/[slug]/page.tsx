@@ -14,6 +14,7 @@ import { BotanicalFrame } from "@/components/ui/BotanicalFrame";
 import { FavouriteButton } from "@/components/recipe/FavouriteButton";
 import { PrintButton } from "@/components/recipe/PrintButton";
 import { FadeUp } from "@/components/ui/FadeUp";
+import { PostIt } from "@/components/ui/PostIt";
 
 interface Props {
   params: Promise<{ lang: string; slug: string }>;
@@ -146,6 +147,13 @@ export default async function RecipePage({ params }: Props) {
             <ServingsCalculator baseServings={recipe.servings} ingredients={recipe.ingredients} t={{ servings: t.recipe.servings, reset: t.recipe.reset }} />
           </section>
           </FadeUp>
+
+          {/* Gluten-free post-it */}
+          {recipe.glutenFreeNote && (
+            <FadeUp>
+              <PostIt label={t.recipe.glutenFreeLabel} note={recipe.glutenFreeNote} />
+            </FadeUp>
+          )}
 
           {/* Related recipes callout */}
           {relatedRecipeData.length > 0 && (
