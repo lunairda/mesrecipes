@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import { PostHogProvider } from "@/components/PostHogProvider";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -34,7 +35,7 @@ export default function RootLayout({
   return (
     <html className={`${playfair.variable} ${dmSans.variable} h-full`}>
       <body className="min-h-full flex flex-col bg-cream text-forest antialiased">
-        {children}
+        <PostHogProvider>{children}</PostHogProvider>
       </body>
     </html>
   );
