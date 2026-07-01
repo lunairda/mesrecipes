@@ -23,7 +23,9 @@ export function proxy(request: NextRequest) {
 
   // Detect preferred language from Accept-Language header
   const acceptLanguage = request.headers.get("accept-language") ?? "";
-  const preferredLocale = acceptLanguage.toLowerCase().startsWith("fr")
+  const preferredLocale = acceptLanguage.toLowerCase().startsWith("tr")
+    ? "tr"
+    : acceptLanguage.toLowerCase().startsWith("fr")
     ? "fr"
     : defaultLocale;
 

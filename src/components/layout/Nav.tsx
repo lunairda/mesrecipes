@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { HerbSprig } from "@/components/doodles";
-import type { Locale } from "@/lib/i18n";
-import { getT } from "@/lib/i18n";
+import { locales, getT, type Locale } from "@/lib/i18n";
 import { MobileMenu } from "./MobileMenu";
 
 interface Props {
@@ -16,7 +15,8 @@ const HeartIcon = () => (
 
 export function Nav({ lang }: Props) {
   const t = getT(lang);
-  const otherLang = lang === "en" ? "fr" : "en";
+  const otherLangs = locales.filter((l) => l !== lang);
+  const langLabels: Record<Locale, string> = { en: "EN", fr: "FR", tr: "TR" };
 
   const links = [
     { href: `/${lang}/recipes`, label: t.nav.recipes },
@@ -57,23 +57,24 @@ export function Nav({ lang }: Props) {
               </Link>
             </li>
           ))}
-          <li>
-            <Link
-              href={`/${otherLang}`}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full transition-opacity hover:opacity-75"
-              style={{ fontFamily: "var(--font-body)", backgroundColor: "#EDE9E1", color: "#2C3A2C" }}
-              aria-label={`Switch to ${otherLang === "en" ? "English" : "Français"}`}
-            >
-              {otherLang === "fr" ? "FR" : "EN"}
-            </Link>
-          </li>
+          {otherLangs.map((l) => (
+            <li key={l}>
+              <Link
+                href={`/${l}`}
+                className="text-xs font-semibold px-3 py-1.5 rounded-full transition-opacity hover:opacity-75"
+                style={{ fontFamily: "var(--font-body)", backgroundColor: "#EDE9E1", color: "#2C3A2C" }}
+              >
+                {langLabels[l]}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
 
       {/* Mobile hamburger */}
       <MobileMenu
         links={links}
-        switcher={{ href: `/${otherLang}`, label: otherLang === "fr" ? "FR" : "EN" }}
+        switchers={otherLangs.map((l) => ({ href: `/${l}`, label: langLabels[l] }))}
       />
     </header>
   );

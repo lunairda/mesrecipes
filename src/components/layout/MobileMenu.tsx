@@ -4,10 +4,10 @@ import Link from "next/link";
 
 interface Props {
   links: { href: string; label: string; icon?: React.ReactNode }[];
-  switcher: { href: string; label: string };
+  switchers: { href: string; label: string }[];
 }
 
-export function MobileMenu({ links, switcher }: Props) {
+export function MobileMenu({ links, switchers }: Props) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
 
@@ -47,15 +47,18 @@ export function MobileMenu({ links, switcher }: Props) {
               {label}
             </Link>
           ))}
-          <div style={{ borderTop: "1px solid #EDE9E1" }} className="pt-4">
-            <Link
-              href={switcher.href}
-              onClick={close}
-              className="inline-block text-sm font-semibold px-4 py-1.5 rounded-full"
-              style={{ backgroundColor: "#EDE9E1", color: "#2C3A2C", fontFamily: "var(--font-body)" }}
-            >
-              {switcher.label}
-            </Link>
+          <div style={{ borderTop: "1px solid #EDE9E1" }} className="pt-4 flex gap-2">
+            {switchers.map((s) => (
+              <Link
+                key={s.href}
+                href={s.href}
+                onClick={close}
+                className="inline-block text-sm font-semibold px-4 py-1.5 rounded-full"
+                style={{ backgroundColor: "#EDE9E1", color: "#2C3A2C", fontFamily: "var(--font-body)" }}
+              >
+                {s.label}
+              </Link>
+            ))}
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-export const locales = ["en", "fr"] as const;
+export const locales = ["en", "fr", "tr"] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = "en";
 
@@ -145,6 +145,78 @@ export const translations = {
     },
     footer: {
       tagline: "Assaisonné de joie.",
+    },
+  },
+  tr: {
+    nav: {
+      recipes: "Tarifler",
+      about: "Hakkımda",
+      saved: "Kaydedilenler",
+      contact: "İletişim",
+    },
+    home: {
+      hero1: "İyi yemek karmaşık olmak zorunda değil.",
+      hero2: "İyi ye. İyi hisset. Tekrarla.",
+      cta: "Tariflere Göz At",
+      recentRecipes: "Son Tarifler",
+      seeAll: "Tüm tarifleri gör →",
+    },
+    recipes: {
+      title: "Tüm Tarifler",
+      subtitle: "Her ruh haline uygun, sade ve besleyici yemekler.",
+      searchPlaceholder: "Tarif ara…",
+      all: "Tümü",
+      noResults: "Tarif bulunamadı. Farklı bir şey deneyin!",
+      resultsSingular: "tarif",
+      resultsPlural: "tarif",
+    },
+    recipe: {
+      ingredients: "Malzemeler",
+      method: "Yapılışı",
+      nutrition: "Besin Değerleri",
+      perServing: "porsiyon başına",
+      watch: "Video",
+      back: "← Tüm tariflere dön",
+      servings: "Porsiyon",
+      reset: "sıfırla",
+      prep: "Hazırlık",
+      cook: "Pişirme",
+      total: "Toplam",
+      difficulty: "Zorluk",
+      easy: "kolay",
+      medium: "orta",
+      hard: "zor",
+      step: "Adım",
+      save: "Kaydet",
+      saved: "Kaydedildi",
+      print: "PDF olarak kaydet",
+      makeFromScratch: "Kendin yapmak ister misin?",
+      glutenFreeLabel: "Glutensiz alternatif",
+    },
+    about: {
+      title: "Merhaba, ben Azi.",
+      subtitle: "27 · Türk · Paris'te yaşıyor",
+      photoSoon: "fotoğraf yakında",
+      factsTitle: "Hakkımda birkaç şey",
+    },
+    saved: {
+      title: "Kaydedilen Tarifler",
+      empty: "Henüz kaydedilen tarif yok. Beğeneceğin bir şeyler bul!",
+      emptyLink: "Tarifleri keşfet →",
+    },
+    contact: {
+      title: "İletişime geç",
+      subtitle: "Bir soru, öneri ya da sadece merhaba demek mi istiyorsun? Mesaj at — duymaktan memnuniyet duyarım.",
+      name: "Adın",
+      email: "E-posta adresin",
+      message: "Mesajın",
+      send: "Gönder",
+      sending: "Gönderiliyor…",
+      success: "Mesajın iletildi! En kısa sürede geri döneceğim.",
+      error: "Bir şeyler ters gitti. Tekrar dener misin?",
+    },
+    footer: {
+      tagline: "Neşeyle tatlandırılmış.",
     },
   },
 } satisfies Record<Locale, unknown>;

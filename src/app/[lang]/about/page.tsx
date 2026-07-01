@@ -79,12 +79,19 @@ const factsFr = [
   { icon: <TeaCup />, text: "La cuisine turque est ma zone de confort. L'odeur d'une bonne mercimek çorbası me ramène toujours à la maison." },
 ];
 
+const factsTr = [
+  { icon: <MusicNote />, text: "Mutfakta yalnızca çok yüksek sesli, enerjik bir playlist eşliğinde yemek yapıyorum. Dans ettiren, ruhu özgür bırakan türden." },
+  { icon: <Suitcase />, text: "Yeni yerler keşfetmeyi seviyorum ve aklımda en çok kalan şey hep yemekler oluyor. Bir yemeği yiyip o yemeğin geldiği kültürü gerçekten anlamak bambaşka bir şey." },
+  { icon: <Chopsticks />, text: "Asya mutfağı benim için sonsuz bir keşif alanı. O kadar geniş ve katmanlı ki yüzeyi zar zor çizdiğimi hissediyorum — bu yüzden de geri dönmeyi bırakamıyorum." },
+  { icon: <Croissant />, text: "Fransız pastacılığı benim zaafım. Paris'te yaşıyor olmak hiç yardımcı olmuyor." },
+  { icon: <TeaCup />, text: "Türk mutfağı benim konfor alanım. İyi bir mercimek çorbasının kokusu hâlâ bana evi hissettiriyor." },
+];
+
 export default async function AboutPage({ params }: Props) {
   const { lang } = await params;
   const locale = lang as Locale;
   const t = getT(locale);
-  const isFr = locale === "fr";
-  const facts = isFr ? factsFr : factsEn;
+  const facts = locale === "fr" ? factsFr : locale === "tr" ? factsTr : factsEn;
 
   // Find any supported image in the about folder
   const aboutDir = path.join(process.cwd(), "public/images/about");
@@ -135,12 +142,19 @@ export default async function AboutPage({ params }: Props) {
 
           <FadeUp delay={0.05}>
           <div className="flex flex-col gap-6 text-base leading-relaxed" style={{ fontFamily: "var(--font-body)", color: "#2C3A2C" }}>
-            {isFr ? (
+            {locale === "fr" ? (
               <>
                 <p>J&apos;étais autrefois la personne la plus difficile de la pièce. Et honnêtement ? Je le suis encore un peu, mais quelque part en chemin, être difficile s&apos;est transformé en curiosité.</p>
                 <p>Grandir en Turquie, partir en master en Angleterre, et maintenant vivre à Paris m&apos;a donné la plus belle des excuses pour explorer des cultures culinaires très différentes. Chaque ville, chaque voyage, chaque dîner chez des amis m&apos;a appris quelque chose de nouveau.</p>
                 <p>Ce que je préfère faire après avoir goûté un plat que j&apos;adore, c&apos;est rentrer à la maison et le reproduire. Parfois simplifié, parfois rendu un peu plus sain, parfois juste retouché jusqu&apos;à ce qu&apos;il me ressemble. Je ne mange pas de viande rouge, donc beaucoup de mes recettes vont naturellement dans ce sens, mais l&apos;objectif est toujours le même : une cuisine vraiment délicieuse qui fait du bien.</p>
                 <p>J&apos;ai créé ce site parce que je perdais mes recettes. Des notes griffonnées, des onglets oubliés, des proportions à moitié mémorisées. Mes Recipes, c&apos;est ma façon de les garder, et de les partager avec ceux qui pourraient les aimer aussi.</p>
+              </>
+            ) : locale === "tr" ? (
+              <>
+                <p>Odanın en seçici yiyicisiyim diyebilirim. Dürüst olmak gerekirse hâlâ biraz öyleyim — ama bir noktada seçicilik meraklılığa dönüştü.</p>
+                <p>Türkiye&apos;de büyümek, yüksek lisans için İngiltere&apos;ye gitmek ve şimdi Paris&apos;te yaşamak, birbirinden çok farklı yemek kültürlerini keşfetmek için mükemmel bir bahane oldu. Her şehir, her yolculuk, bir arkadaşın sofrasındaki her akşam yemeği bana yeni bir şey öğretti.</p>
+                <p>Sevdiğim bir yemeği tattıktan sonra en sevdiğim şey eve gidip onu kendim çözmeye çalışmak. Bazen sadeleştirerek, bazen biraz daha sağlıklı hale getirerek, bazen de kendime benzeyene kadar ufak dokunuşlar yaparak. Kırmızı et yemediğim için tariflerim doğal olarak o yönde şekilleniyor — ama hedef hep aynı: gerçekten lezzetli ve iyi hissettiren yemekler.</p>
+                <p>Bu siteyi kurdum çünkü tariflerimi sürekli kaybediyordum. Çiziktirilen notlar, unutulan sekmeler, yarı yarıya hatırlanan miktarlar. Mes Recipes, onları tutmanın ve belki sevebilecek başkalarıyla paylaşmanın benim yolum.</p>
               </>
             ) : (
               <>
@@ -179,8 +193,10 @@ export default async function AboutPage({ params }: Props) {
             <div className="flex items-center gap-3">
               <Bowl size={28} color="#C9A84C" />
               <p className="text-base leading-relaxed italic" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
-                {isFr
+                {locale === "fr"
                   ? "Quoi que vous fassiez, n'oubliez pas d'assaisonner avec de la joie. C'est tout le secret."
+                  : locale === "tr"
+                  ? "Ne yaparsanız yapın, neşeyle tatlandırmayı unutmayın. Sır bu."
                   : "Whatever you make, don't forget to season it with joy. That's the whole secret."}
               </p>
             </div>
