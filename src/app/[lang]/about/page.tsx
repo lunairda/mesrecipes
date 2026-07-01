@@ -151,10 +151,10 @@ export default async function AboutPage({ params }: Props) {
               </>
             ) : locale === "tr" ? (
               <>
-                <p>Odanın en seçici yiyicisiyim diyebilirim. Dürüst olmak gerekirse hâlâ biraz öyleyim — ama bir noktada seçicilik meraklılığa dönüştü.</p>
-                <p>Türkiye&apos;de büyümek, yüksek lisans için İngiltere&apos;ye gitmek ve şimdi Paris&apos;te yaşamak, birbirinden çok farklı yemek kültürlerini keşfetmek için mükemmel bir bahane oldu. Her şehir, her yolculuk, bir arkadaşın sofrasındaki her akşam yemeği bana yeni bir şey öğretti.</p>
-                <p>Sevdiğim bir yemeği tattıktan sonra en sevdiğim şey eve gidip onu kendim çözmeye çalışmak. Bazen sadeleştirerek, bazen biraz daha sağlıklı hale getirerek, bazen de kendime benzeyene kadar ufak dokunuşlar yaparak. Kırmızı et yemediğim için tariflerim doğal olarak o yönde şekilleniyor — ama hedef hep aynı: gerçekten lezzetli ve iyi hissettiren yemekler.</p>
-                <p>Bu siteyi kurdum çünkü tariflerimi sürekli kaybediyordum. Çiziktirilen notlar, unutulan sekmeler, yarı yarıya hatırlanan miktarlar. Mes Recipes, onları tutmanın ve belki sevebilecek başkalarıyla paylaşmanın benim yolum.</p>
+                <p>Eskiden çok fazla yemek seçen birisiydim. Dürüst olmak gerekirse hâlâ biraz öyleyim — ama bir noktada seçiciliğim meraklılığa dönüştü.</p>
+                <p>İstanbul&apos;da büyümek, yüksek lisans için İngiltere&apos;ye gitmek ve şimdi Paris&apos;te yaşamak ve sık sık seyahat etmek birbirinden çok farklı yemek kültürlerini keşfetmem için mükemmel bir bahane oldu. Her şehir, her yolculuk, bir arkadaşın sofrasındaki her akşam yemeği bana yeni bir şey öğretti.</p>
+                <p>Açıkçası şu an en büyük tutkularımdan bir tanesi beğendiğim (ya da bayıldığım) bir yemeği tattıktan sonra eve gidip onu kendim çözmeye çalışmak. Bazen sadeleştirerek, bazen biraz daha sağlıklı hale getirerek, bazen de kendime benzeyene kadar ufak dokunuşlar yaparak bir şeyler üretmek bana çok iyi geliyor. Kırmızı et yemediğim için tariflerim doğal olarak o yönde şekilleniyor — ama hedefim hep aynı: gerçekten lezzetli ve iyi hissettiren yemekler yapmak.</p>
+                <p>Bu siteyi açma sebebim tariflerimi sürekli kaybediyor olmamdı. Çiziktirilen notlar, unutulan sekmeler, yarı yarıya hatırlanan miktarlar daha önce yaptığım tarifleri tekrar bulmak için uzun zaman harcamama neden oluyordu. Bugün Mes Recipes, onları tutmanın ve belki de tariflerimi sevebilecek başkalarıyla paylaşmanın bir yolu oldu.</p>
               </>
             ) : (
               <>
@@ -196,7 +196,7 @@ export default async function AboutPage({ params }: Props) {
                 {locale === "fr"
                   ? "Quoi que vous fassiez, n'oubliez pas d'assaisonner avec de la joie. C'est tout le secret."
                   : locale === "tr"
-                  ? "Ne yaparsanız yapın, neşeyle tatlandırmayı unutmayın. Sır bu."
+                  ? "Ne yaparsanız yapın, neşeyle tatlandırmayı unutmayın. İşin tüm sırrı bu."
                   : "Whatever you make, don't forget to season it with joy. That's the whole secret."}
               </p>
             </div>

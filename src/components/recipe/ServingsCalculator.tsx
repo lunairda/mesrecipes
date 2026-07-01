@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 interface Ingredient {
-  amount: number;
+  amount: number | string;
   unit: string;
   name: string;
 }
@@ -90,7 +90,9 @@ export function ServingsCalculator({ baseServings, ingredients, t }: Props) {
             />
             <span>
               <span className="font-semibold">
-                {formatAmount(ing.amount * ratio)}
+                {typeof ing.amount === "string"
+                  ? ing.amount
+                  : formatAmount(ing.amount * ratio)}
                 {ing.unit ? ` ${ing.unit}` : ""}
               </span>{" "}
               {ing.name}
