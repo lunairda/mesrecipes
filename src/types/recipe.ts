@@ -29,6 +29,7 @@ export const RecipeSchema = z.object({
     })
   ),
   steps: z.array(z.string()),
+  relatedRecipes: z.array(z.string()).optional(),
 });
 
 export type RecipeFrontmatter = z.infer<typeof RecipeSchema>;

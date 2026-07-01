@@ -46,6 +46,7 @@ export const translations = {
       save: "Save recipe",
       saved: "Saved",
       print: "Save as PDF",
+      makeFromScratch: "Want to make it from scratch?",
     },
     about: {
       title: "Hi, I'm Azi.",
@@ -116,6 +117,7 @@ export const translations = {
       save: "Sauvegarder",
       saved: "Sauvegardé",
       print: "Enregistrer en PDF",
+      makeFromScratch: "Envie de le faire maison ?",
     },
     about: {
       title: "Bonjour, je suis Azi.",

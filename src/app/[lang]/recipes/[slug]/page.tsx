@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import fs from "fs";
 import path from "path";
 import { getAllRecipes, getRecipeBySlug } from "@/lib/recipes";
@@ -46,6 +47,10 @@ export default async function RecipePage({ params }: Props) {
     ? path.join(process.cwd(), "public", recipe.heroImage)
     : null;
   const hasHeroImage = heroImagePath ? fs.existsSync(heroImagePath) : false;
+
+  const relatedRecipeData = (recipe.relatedRecipes ?? [])
+    .map((s) => getRecipeBySlug(s, locale))
+    .filter((r): r is NonNullable<typeof r> => r !== null);
 
   return (
     <>
@@ -141,6 +146,32 @@ export default async function RecipePage({ params }: Props) {
             <ServingsCalculator baseServings={recipe.servings} ingredients={recipe.ingredients} t={{ servings: t.recipe.servings, reset: t.recipe.reset }} />
           </section>
           </FadeUp>
+
+          {/* Related recipes callout */}
+          {relatedRecipeData.length > 0 && (
+            <FadeUp>
+            <div className="mb-5 print-hide">
+              {relatedRecipeData.map((rel) => (
+                <Link
+                  key={rel.slug}
+                  href={`/${locale}/recipes/${rel.slug}`}
+                  className="flex items-center gap-4 p-4 rounded-xl transition-all hover:opacity-85"
+                  style={{ backgroundColor: "#EDE9E1", borderLeft: "3px solid #7A9E7E" }}
+                >
+                  <Leaf size={18} color="#7A9E7E" className="flex-shrink-0" />
+                  <div>
+                    <p className="text-xs font-semibold mb-0.5" style={{ fontFamily: "var(--font-body)", color: "#7A9E7E" }}>
+                      {t.recipe.makeFromScratch}
+                    </p>
+                    <p className="text-sm font-bold" style={{ fontFamily: "var(--font-display)", color: "#2C3A2C" }}>
+                      {rel.title} →
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            </FadeUp>
+          )}
 
           {/* Divider */}
           <div className="flex items-center gap-3 mb-6 opacity-30">
