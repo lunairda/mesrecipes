@@ -155,7 +155,7 @@ export const translations = {
       contact: "İletişim",
     },
     home: {
-      hero1: "İyi yemek karmaşık olmak zorunda değil.",
+      hero1: "İyi bir yemek karmaşık olmak zorunda değil.",
       hero2: "İyi ye. İyi hisset. Tekrarla.",
       cta: "Tariflere Göz At",
       recentRecipes: "Son Tarifler",
@@ -195,7 +195,7 @@ export const translations = {
     },
     about: {
       title: "Merhaba, ben Azi.",
-      subtitle: "27 · Türk · Paris'te yaşıyor",
+      subtitle: "27 · Paris'te yaşıyor",
       photoSoon: "fotoğraf yakında",
       factsTitle: "Hakkımda birkaç şey",
     },
