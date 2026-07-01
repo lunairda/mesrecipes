@@ -82,10 +82,10 @@ export function RecipesClient({ recipes, allTags, t, locale, imageMap }: Props) 
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((recipe, i) => (
-            <FadeUp key={recipe.slug} delay={i * 0.06}>
+            <FadeUp key={recipe.slug} delay={i * 0.06} className="h-full">
               <Link
                 href={`/${locale}/recipes/${recipe.slug}`}
-                className="group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="group flex flex-col h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
                 style={{ backgroundColor: "#EDE9E1" }}
               >
                 <div className="w-full aspect-square rounded-xl mb-5 overflow-hidden relative flex items-center justify-center" style={{ backgroundColor: "#FAF7F2" }}>
@@ -114,7 +114,7 @@ export function RecipesClient({ recipes, allTags, t, locale, imageMap }: Props) 
                 <p className="text-sm leading-relaxed mb-4" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
                   {recipe.description}
                 </p>
-                <div className="flex items-center gap-4 text-xs" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
+                <div className="flex items-center gap-4 text-xs mt-auto" style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}>
                   <span>⏱ {recipe.prepTime + recipe.cookTime} min</span>
                   <span>· {recipe.servings} {locale === "fr" ? "portions" : "servings"}</span>
                 </div>

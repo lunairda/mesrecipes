@@ -50,7 +50,7 @@ export function SavedContent({ recipes, imageMap, locale, t }: Props) {
         <Link
           key={recipe.slug}
           href={`/${locale}/recipes/${recipe.slug}`}
-          className="group block rounded-2xl p-6 transition-shadow hover:shadow-md"
+          className="group flex flex-col h-full rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
           style={{ backgroundColor: "#EDE9E1" }}
         >
           <div
@@ -100,7 +100,7 @@ export function SavedContent({ recipes, imageMap, locale, t }: Props) {
             {recipe.description}
           </p>
           <div
-            className="flex items-center gap-4 text-xs"
+            className="flex items-center gap-4 text-xs mt-auto"
             style={{ fontFamily: "var(--font-body)", color: "#6B5C4A" }}
           >
             <span>⏱ {recipe.prepTime + recipe.cookTime} min</span>
